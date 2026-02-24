@@ -21,7 +21,7 @@ function Home() {
 
     const togglePlay = () => {
         if (isPlaying) {
-            audioRef.current.pausepause();
+            audioRef.current.pause();
         } else {
             audioRef.current.play();
         }
@@ -51,7 +51,7 @@ function Home() {
 
                         </div>
 
-                        <audio ref={audioRef} src={song.audio}></audio>
+                        <audio ref={audioRef} src={song.audio} loop></audio>
                     </div>
                 ))}
             </div>
