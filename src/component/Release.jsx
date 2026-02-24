@@ -10,7 +10,7 @@ import warmWinterImg from "../assets/imageMusic/warmWinter.jpg";
 import wayfarerImg from "../assets/imageMusic/wayfarer.jpg";
 import nightCoffeImg from "../assets/imageMusic/nightCoffe.jpg";
 import imsoTiredImg from "../assets/imageMusic/imsoTired.jpg";
-import ifTheWorldEndsImg from "../assets/imageMusic/ifTheWorldEnds.jpg";
+// import ifTheWorldEndsImg from "../assets/imageMusic/ifTheWorldEnds.jpg";
 import summerFlowersImg from "../assets/imageMusic/summerFlowers.jpg";
 import frierensLoveImg from "../assets/imageMusic/frierensLove.jpg";
 import nazettoNoKiboImg from "../assets/imageMusic/nazettoNoKibo.jpg";
@@ -87,12 +87,12 @@ function Release() {
             image: imsoTiredImg,
             link: "https://social.tunecore.com/linkShare?linkid=J5onOn4Qp1Cy19la1EU7nA"
         },
-        {
-            id: 100,
-            title: "IftheWorldEnds",
-            image: ifTheWorldEndsImg,
-            link: "https://social.tunecore.com/linkShare?linkid=O-puizwiPMfojKSCAxK4kg"
-        },
+        // {
+        //     id: 100,
+        //     title: "IftheWorldEnds",
+        //     image: ifTheWorldEndsImg,
+        //     link: "https://social.tunecore.com/linkShare?linkid=O-puizwiPMfojKSCAxK4kg"
+        // },
         {
             id: 11,
             title: "SummerFlowers",
