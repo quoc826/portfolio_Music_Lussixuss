@@ -1,10 +1,16 @@
+/* =========================================
+   Release.css
+========================================= */
+
 .release-container {
     padding: 120px 20px 50px;
     flex: 1; 
     width: 100%; 
+    min-height: 100vh;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
+    background-color: transparent; 
 }
 
 .release-wrapper {
@@ -19,16 +25,26 @@
 .song-card {
     position: relative;
     width: 100%;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
+    overflow: visible;
     border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.song-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 .song-card img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto; 
+    object-fit: contain; 
     display: block;
+    border-radius: 6px;
+    background-color: rgba(0,0,0,0.15);
 }
 
 .song-overlay {
@@ -44,12 +60,10 @@
     align-items: center;
     border-radius: 0;
 
-    /* Màu sắc */
     background-color: rgba(0, 0, 0, 0.5);
     color: #ffffff !important;
     text-decoration: none;
 
-    /* Font chữ */
     font-weight: 700;
     text-transform: uppercase;
     font-size: 14px;
@@ -58,11 +72,13 @@
 }
 
 .song-overlay:hover {
-    background-color: #db6e0f;
-    /* Xanh nước biển */
+    background-color: #db6e0f; 
 }
 
-/* Responsive Design */
+/* =========================================
+   Responsive Design
+========================================= */
+
 /* Tablet */
 @media (max-width: 1024px) {
     .release-container {

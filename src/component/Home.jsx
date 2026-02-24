@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import nightImg from "../assets/imageMusic/night.jpg";
 import nightAudio from "../assets/audio/nightAudio.mp3";
-
+import 'animate.css';
 import "../CSS/Home.css";
 
 function Home() {
@@ -34,13 +34,13 @@ function Home() {
                 {song.map((song) => (
                     <div className="home-card" key={song.id}>
 
-                        <div className="img-container">
+                        <div className="img-container  animate__animated animate__backInDown">
                             <img src={song.image} alt={song.title} />
                         </div>
 
                         <div className="controls-container">
 
-                            <button className="play-btn" onClick={togglePlay}>
+                            <button className="play-btn animate__animated animate__bounceIn" onClick={togglePlay}>
                                 {isPlaying ? "⏸" : "▶"}
                             </button>
 

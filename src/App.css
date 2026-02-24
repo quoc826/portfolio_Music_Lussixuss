@@ -1,15 +1,22 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh; 
+}
+
 #root {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100vh;
-  
+  min-height: 100vh; 
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
                     url('./assets/BgInfor.jpg'); 
   
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; 
+  
   background-attachment: fixed; 
 }
 
@@ -17,31 +24,24 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh; 
-  flex: 1; 
-  display: flex;
-  flex-direction: column;
+
 }
 
-/* Responsive Design */
-/* Tablet & Smaller */
+
 @media (max-width: 1024px) {
   #root {
-    background-attachment: scroll;
+    background-attachment: scroll; 
   }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
   #root {
-    background-size: cover;
     background-attachment: scroll;
   }
 }
 
-/* Small mobile */
 @media (max-width: 480px) {
   #root {
-    background-size: cover;
     background-attachment: scroll;
   }
 }

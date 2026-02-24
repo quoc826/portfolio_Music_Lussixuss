@@ -50,22 +50,22 @@ function ContactForm() {
 
           <div className="input-group">
             <label>First name</label>
-            <input name="firstName" value={formData.firstName} placeholder="First name" onChange={handleChange} />
+            <input className="animate__animated animate__fadeIn" name="firstName" value={formData.firstName} placeholder="First name" onChange={handleChange} />
           </div>
 
           <div className="input-group">
             <label>Last name</label>
-            <input name="lastName" value={formData.lastName} placeholder="Last name" onChange={handleChange} />
+            <input className="animate__animated animate__fadeIn" name="lastName" value={formData.lastName} placeholder="Last name" onChange={handleChange} />
           </div>
 
           <div className="input-group">
             <label>Email *</label>
-            <input name="email" value={formData.email} type="email" placeholder="Email" required onChange={handleChange} />
+            <input className="animate__animated animate__fadeIn" name="email" value={formData.email} type="email" placeholder="Email" required onChange={handleChange} />
           </div>
 
           <div className="input-group">
             <label>Message *</label>
-            <textarea name="message" value={formData.message} placeholder="Message" required onChange={handleChange} />
+            <textarea className="animate__animated animate__fadeIn" name="message" value={formData.message} placeholder="Message" required onChange={handleChange} />
           </div>
 
           <button type="submit" className="submit-btn">Submit</button>
