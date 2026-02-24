@@ -88,7 +88,7 @@ function Release() {
             link: "https://social.tunecore.com/linkShare?linkid=J5onOn4Qp1Cy19la1EU7nA"
         },
         {
-            id: 10,
+            id: 100,
             title: "IftheWorldEnds",
             image: ifTheWorldEndsImg,
             link: "https://social.tunecore.com/linkShare?linkid=O-puizwiPMfojKSCAxK4kg"
