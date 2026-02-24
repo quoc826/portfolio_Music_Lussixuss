@@ -10,7 +10,7 @@ import warmWinterImg from "../assets/imageMusic/warmWinter.jpg";
 import wayfarerImg from "../assets/imageMusic/wayfarer.jpg";
 import nightCoffeImg from "../assets/imageMusic/nightCoffe.jpg";
 import imsoTiredImg from "../assets/imageMusic/imsoTired.jpg";
-import ifTheWorldEndsImg from "../assets/imageMusic/iftheWorldEnds.jpg";
+import ifTheWorldEndsImg from "../assets/imageMusic/ifTheWorldEnds.jpg";
 import summerFlowersImg from "../assets/imageMusic/summerFlowers.jpg";
 import frierensLoveImg from "../assets/imageMusic/frierensLove.jpg";
 import nazettoNoKiboImg from "../assets/imageMusic/nazettoNoKibo.jpg";
