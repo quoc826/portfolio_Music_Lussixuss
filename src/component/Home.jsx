@@ -21,7 +21,7 @@ function Home() {
 
     const togglePlay = () => {
         if (isPlaying) {
-            audioRef.current.pause();
+            audioRef.current.pausepause();
         } else {
             audioRef.current.play();
         }
@@ -43,6 +43,7 @@ function Home() {
                             <button className="play-btn" onClick={togglePlay}>
                                 {isPlaying ? "⏸" : "▶"}
                             </button>
+
 
                             <a href={song.link} target="_blank" rel="noreferrer" className="start-btn">
                                 Start

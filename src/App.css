@@ -21,3 +21,27 @@
   display: flex;
   flex-direction: column;
 }
+
+/* Responsive Design */
+/* Tablet & Smaller */
+@media (max-width: 1024px) {
+  #root {
+    background-attachment: scroll;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  #root {
+    background-size: cover;
+    background-attachment: scroll;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  #root {
+    background-size: cover;
+    background-attachment: scroll;
+  }
+}

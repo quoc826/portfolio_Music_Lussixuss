@@ -79,3 +79,104 @@
     margin: 0;
     letter-spacing: 1px;
 }
+
+/* Responsive Design */
+/* Tablet */
+@media (max-width: 1024px) {
+    .header-container {
+        padding: 12px 30px;
+    }
+
+    .header-container ul {
+        gap: 15px;
+    }
+
+    .header-container a,
+    .header-container li {
+        font-size: 14px;
+    }
+
+    .Name h3 {
+        font-size: 20px;
+        letter-spacing: 3px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .header-container ul {
+        gap: 8px;
+    }
+
+    .header-container a,
+    .header-container li {
+        font-size: 12px;
+    }
+
+    .Logo ul li svg {
+        transform: scale(0.9);
+    }
+
+    .Logo ul li a:hover svg {
+        transform: scale(1.1);
+        color: #1DB954;
+    }
+
+    .Name h3 {
+        font-size: 16px;
+        letter-spacing: 2px;
+    }
+
+    .Information ul {
+        gap: 10px;
+    }
+
+    .footer-container {
+        padding: 15px 0;
+    }
+
+    .footer-container p {
+        font-size: 12px;
+        padding: 0 10px;
+        text-align: center;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    .header-container {
+        padding: 6px 8px;
+        gap: 6px;
+    }
+
+    .header-container ul {
+        gap: 6px;
+    }
+
+    .header-container a,
+    .header-container li {
+        font-size: 10px;
+    }
+
+    .Logo ul li svg {
+        transform: scale(0.8);
+    }
+
+    .Logo ul li a:hover svg {
+        transform: scale(1);
+    }
+
+    .Name h3 {
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+    .Information ul {
+        gap: 8px;
+    }
+}
