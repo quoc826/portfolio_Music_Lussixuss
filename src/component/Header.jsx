@@ -35,7 +35,6 @@ function Header() {
                 <h3>Lussixuss</h3>
             </div>
 
-            {/* Phần 3: Điều hướng Router */}
             <div className="Information">
                 <ul>
                     <li><Link to="/">Home</Link></li>
