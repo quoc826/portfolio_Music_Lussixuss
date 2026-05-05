@@ -78,3 +78,51 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Screen Reader Only - hidden visually but accessible to search engines */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* SEO Content Section - subtle but visible for search engines */
+.seo-content {
+  max-width: 800px;
+  margin: 40px auto 0;
+  padding: 30px 20px;
+  text-align: center;
+  opacity: 0.75;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.seo-content h1,
+.seo-content h2 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+}
+
+.seo-content p {
+  margin-bottom: 10px;
+}
+
+.seo-content a {
+  color: rgba(219, 110, 15, 0.8);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.seo-content a:hover {
+  color: #db6e0f;
+}
+

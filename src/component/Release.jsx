@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../CSS/Release.css";
+import SEOHead from "./SEOHead";
 
 import nightImg from "../assets/imageMusic/night.jpg";
 import lightImg from "../assets/imageMusic/ligth.jpg";
@@ -28,11 +29,18 @@ import fantasyImg from "../assets/imageMusic/fantasy.jpg";
 import iJustWanttoBeAloneImg from "../assets/imageMusic/iJustWanttoBeAlone.jpg";
 import himeImg from "../assets/imageMusic/hime.jpg";
 import endImg from "../assets/imageMusic/end.jpg";
+import rentaImg from "../assets/imageMusic/renta.jpg";
 
 
 
 function Release() {
     const [songs] = useState([
+        {
+            id: 0,
+            title: "Renta",
+            image: rentaImg,
+            link: "https://social.tunecore.com/linkShare?linkid=BHFTysCuEYLxQJkb60hYYA"
+        },
         {
             id: 1,
             title: "Night",
@@ -199,18 +207,55 @@ function Release() {
 
     return (
         <>
-            <div className="release-container">
-                <div className="release-wrapper ">
-                    {songs.map((song) =>
-                        <div className="song-card" key={song.id}>
-                            <img className="animate__animated animate__fadeInUp" src={song.image} alt={song.title} />
+            <SEOHead
+                title="Lussixuss Releases – All Lofi Tracks & Albums | Night, Rent & More"
+                description="Browse all Lussixuss lofi music releases. Stream Night, Light, Night Light, Tempus, Warm Winter, and 20+ more chill lo-fi tracks by Lussixuss."
+                path="/release"
+            />
+            <div className="release-container" itemScope itemType="https://schema.org/MusicPlaylist">
+                <meta itemProp="name" content="Lussixuss - Complete Discography" />
+                <meta itemProp="description" content="All lofi music tracks by Lussixuss" />
+                <meta itemProp="numTracks" content={songs.length.toString()} />
 
-                            <a href={song.link} target="_blank" rel="noreferrer" className="song-overlay">
+                <h1 className="sr-only">Lussixuss Music Releases – Lofi Tracks Collection</h1>
+
+                <div className="release-wrapper">
+                    {songs.map((song) =>
+                        <article className="song-card" key={song.id} itemScope itemType="https://schema.org/MusicRecording" itemProp="track">
+                            <img 
+                                className="animate__animated animate__fadeInUp" 
+                                src={song.image} 
+                                alt={`${song.title} - Lofi track by Lussixuss`} 
+                                itemProp="image" 
+                                loading="lazy"
+                                decoding="async"
+                            />
+
+                            <a href={song.link} target="_blank" rel="noreferrer" className="song-overlay" itemProp="url" aria-label={`Listen to ${song.title} by Lussixuss`}>
                                 Start
                             </a>
-                        </div>
+                            <meta itemProp="name" content={`${song.title} - Lussixuss`} />
+                            <meta itemProp="byArtist" content="Lussixuss" />
+                            <meta itemProp="genre" content="Lofi" />
+                        </article>
                     )}
                 </div>
+
+                {/* SEO Content - hidden visually, readable by search engines */}
+                <section className="sr-only" aria-label="Lussixuss Discography">
+                    <h2>Lussixuss – Complete Lofi Music Collection</h2>
+                    <p>
+                        Explore the full discography of Lussixuss, featuring {songs.length}+ original
+                        lofi tracks. From the iconic Lussixuss Night series to soothing tracks like
+                        Lussixuss Rent, Warm Winter, Endless Dream, and Fantasy – every track is crafted
+                        to deliver the perfect chill lofi experience.
+                    </p>
+                    <p>
+                        Lussixuss produces lo-fi hip hop, ambient, and chill beats that are perfect
+                        for studying, working, relaxing, or late-night vibes. All tracks are available on major
+                        streaming platforms including Spotify, Apple Music, YouTube, and SoundCloud.
+                    </p>
+                </section>
             </div>
         </>
     )

@@ -1,0 +1,13 @@
+# Robots.txt for Lussixuss Music Portfolio
+# https://lussixuss.vercel.app
+
+User-agent: *
+Allow: /
+Allow: /release
+Allow: /contact
+
+# Sitemaps
+Sitemap: https://lussixuss.vercel.app/sitemap.xml
+
+# Crawl-delay (optional, be friendly to crawlers)
+Crawl-delay: 1

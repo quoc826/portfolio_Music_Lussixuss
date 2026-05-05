@@ -1,5 +1,6 @@
 import { useState } from "react";
 import emailjs from '@emailjs/browser';
+import SEOHead from "./SEOHead";
 import "/src/CSS/infor.css";
 
 function ContactForm() {
@@ -43,35 +44,42 @@ function ContactForm() {
   };
 
   return (
-    <div className="form-wrapper">
-      <div className="contact-container">
-        <form onSubmit={handleSubmit}>
-          <h2>Contact us</h2>
+    <>
+      <SEOHead
+        title="Contact Lussixuss – Book, Collaborate & Reach Out"
+        description="Get in touch with Lussixuss for collaborations, bookings, licensing, or just to say hello. Contact the lofi music artist Lussixuss directly."
+        path="/contact"
+      />
+      <div className="form-wrapper">
+        <div className="contact-container" itemScope itemType="https://schema.org/ContactPage">
+          <form onSubmit={handleSubmit}>
+            <h2>Contact us</h2>
 
-          <div className="input-group">
-            <label>First name</label>
-            <input className="animate__animated animate__fadeIn" name="firstName" value={formData.firstName} placeholder="First name" onChange={handleChange} />
-          </div>
+            <div className="input-group">
+              <label>First name</label>
+              <input className="animate__animated animate__fadeIn" name="firstName" value={formData.firstName} placeholder="First name" onChange={handleChange} />
+            </div>
 
-          <div className="input-group">
-            <label>Last name</label>
-            <input className="animate__animated animate__fadeIn" name="lastName" value={formData.lastName} placeholder="Last name" onChange={handleChange} />
-          </div>
+            <div className="input-group">
+              <label>Last name</label>
+              <input className="animate__animated animate__fadeIn" name="lastName" value={formData.lastName} placeholder="Last name" onChange={handleChange} />
+            </div>
 
-          <div className="input-group">
-            <label>Email *</label>
-            <input className="animate__animated animate__fadeIn" name="email" value={formData.email} type="email" placeholder="Email" required onChange={handleChange} />
-          </div>
+            <div className="input-group">
+              <label>Email *</label>
+              <input className="animate__animated animate__fadeIn" name="email" value={formData.email} type="email" placeholder="Email" required onChange={handleChange} />
+            </div>
 
-          <div className="input-group">
-            <label>Message *</label>
-            <textarea className="animate__animated animate__fadeIn" name="message" value={formData.message} placeholder="Message" required onChange={handleChange} />
-          </div>
+            <div className="input-group">
+              <label>Message *</label>
+              <textarea className="animate__animated animate__fadeIn" name="message" value={formData.message} placeholder="Message" required onChange={handleChange} />
+            </div>
 
-          <button type="submit" className="submit-btn">Submit</button>
-        </form>
+            <button type="submit" className="submit-btn">Submit</button>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
