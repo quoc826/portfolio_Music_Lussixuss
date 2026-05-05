@@ -18,7 +18,7 @@ function SEOHead({ title, description, path = "/" }) {
     // Update canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');
     if (canonical) {
-      canonical.setAttribute("href", `https://lussixuss.vercel.app${path}`);
+      canonical.setAttribute("href", `https://www.lussixuss.online${path}`);
     }
 
     // Update Open Graph tags
@@ -29,7 +29,7 @@ function SEOHead({ title, description, path = "/" }) {
     if (ogDesc) ogDesc.setAttribute("content", description);
 
     const ogUrl = document.querySelector('meta[property="og:url"]');
-    if (ogUrl) ogUrl.setAttribute("content", `https://lussixuss.vercel.app${path}`);
+    if (ogUrl) ogUrl.setAttribute("content", `https://www.lussixuss.online${path}`);
 
     // Update Twitter tags
     const twTitle = document.querySelector('meta[name="twitter:title"]');
