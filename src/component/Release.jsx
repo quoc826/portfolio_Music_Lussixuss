@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../CSS/Release.css";
 import SEOHead from "./SEOHead";
+import { db } from "../firebase";
+import { collection, onSnapshot } from "firebase/firestore";
+import { optimizeCloudinaryUrl } from "../cloudinary";
 
+// Default fallback images
 import nightImg from "../assets/imageMusic/night.jpg";
 import lightImg from "../assets/imageMusic/ligth.jpg";
 import nightLightImg from "../assets/imageMusic/nightLight.jpg";
@@ -31,179 +35,85 @@ import himeImg from "../assets/imageMusic/hime.jpg";
 import endImg from "../assets/imageMusic/end.jpg";
 import rentaImg from "../assets/imageMusic/renta.jpg";
 
-
+// Default songs (fallback when Firestore has no data)
+export const DEFAULT_SONGS = [
+    { id: "d0", title: "Renta", image: rentaImg, link: "https://social.tunecore.com/linkShare?linkid=BHFTysCuEYLxQJkb60hYYA" },
+    { id: "d1", title: "Night", image: nightImg, link: "https://social.tunecore.com/linkShare?linkid=GA6i9wxuXTjXwRTKxaR9_A" },
+    { id: "d2", title: "Light", image: lightImg, link: "https://social.tunecore.com/linkShare?linkid=B1eAd2h9nbgGnfNU_SauQA" },
+    { id: "d3", title: "Night Light", image: nightLightImg, link: "https://social.tunecore.com/linkShare?linkid=nVykxYjeotVIwwNuGaFLmg" },
+    { id: "d4", title: "Tempus", image: tempusImg, link: "https://social.tunecore.com/linkShare?linkid=aW6w-UThLqemmCcaffTThQ" },
+    { id: "d5", title: "homeNight", image: homeNightImg, link: "https://social.tunecore.com/linkShare?linkid=GE42QUWmbWZGH1ZcYLrP5Q" },
+    { id: "d6", title: "WarmWinter", image: warmWinterImg, link: "https://social.tunecore.com/linkShare?linkid=S0BhC296BC4yx7E7WAjBCA" },
+    { id: "d7", title: "wayfarer", image: wayfarerImg, link: "https://social.tunecore.com/linkShare?linkid=-V22ZzKNbLI2k8DA56f9DQ" },
+    { id: "d9", title: "NightCoffe", image: nightCoffeImg, link: "https://social.tunecore.com/linkShare?linkid=KOhU9RvrIWFYcKPLnj4qaw" },
+    { id: "d10", title: "I'msoTired", image: imsoTiredImg, link: "https://social.tunecore.com/linkShare?linkid=J5onOn4Qp1Cy19la1EU7nA" },
+    { id: "d30", title: "end", image: endImg, link: "https://social.tunecore.com/linkShare?linkid=O-puizwiPMfojKSCAxK4kg" },
+    { id: "d11", title: "SummerFlowers", image: summerFlowersImg, link: "https://social.tunecore.com/linkShare?linkid=K-GrA2FZ16AaQv34P8u-xA" },
+    { id: "d12", title: "FrierensLove", image: frierensLoveImg, link: "https://social.tunecore.com/linkShare?linkid=4gRRBPk8o5SxeYOQJT8LCQ" },
+    { id: "d13", title: "NazettoNoKibo", image: nazettoNoKiboImg, link: "https://social.tunecore.com/linkShare?linkid=jRlzp5jOU_gZITpRO_qEHw" },
+    { id: "d15", title: "Past", image: pastImg, link: "https://social.tunecore.com/linkShare?linkid=a-t33wlJNx5S5fdpxmYHow" },
+    { id: "d16", title: "MaidCoffee", image: maidCoffeeImg, link: "https://social.tunecore.com/linkShare?linkid=fgzKIGPTyeA5-70MlVZJzg" },
+    { id: "d17", title: "Alone", image: aloneImg, link: "https://social.tunecore.com/linkShare?linkid=EswdeQu7Oc8_ZeLkznT6uQ" },
+    { id: "d18", title: "Wind", image: windImg, link: "https://social.tunecore.com/linkShare?linkid=Z0YL-CfmKRUJ8s3D9PJsVw" },
+    { id: "d19", title: "Nature", image: natureImg, link: "https://social.tunecore.com/linkShare?linkid=5B0lWq6bxzuk1mmFdBE_bQ" },
+    { id: "d20", title: "Memory", image: memoryImg, link: "https://social.tunecore.com/linkShare?linkid=MX1-R5iF88FPgvAtD24gIQ" },
+    { id: "d21", title: "Childhood", image: ChildhoodImg, link: "https://social.tunecore.com/linkShare?linkid=GF2gGI6MYC-nauuazZaCLg" },
+    { id: "d22", title: "TempusDream", image: tempusDreamImg, link: "https://social.tunecore.com/linkShare?linkid=uiY5SNgTE6bL8QKFqoUyIA" },
+    { id: "d23", title: "Journey", image: journeyImg, link: "https://social.tunecore.com/linkShare?linkid=cjgUBg-BtlCHKNLvUXMNxg" },
+    { id: "d24", title: "Train", image: trainImg, link: "https://social.tunecore.com/linkShare?linkid=b9acF9KBZECJW2FRi1NZxg" },
+    { id: "d25", title: "EndlessDream", image: endlessDreamImg, link: "https://social.tunecore.com/linkShare?linkid=_VNojT7eroauUaMTJ1m_rw" },
+    { id: "d26", title: "Fantasy", image: fantasyImg, link: "https://social.tunecore.com/linkShare?linkid=nCRW0TEeXp1gA-FrCM98bA" },
+    { id: "d27", title: "IJustWanttoBeAlone", image: iJustWanttoBeAloneImg, link: "https://social.tunecore.com/linkShare?linkid=GIodo7PBVsYnNtQZv5hbyQ" },
+    { id: "d28", title: "Hime", image: himeImg, link: "https://social.tunecore.com/linkShare?linkid=9kNdXkHPo753A_HvIr5igA" },
+];
 
 function Release() {
-    const [songs] = useState([
-        {
-            id: 0,
-            title: "Renta",
-            image: rentaImg,
-            link: "https://social.tunecore.com/linkShare?linkid=BHFTysCuEYLxQJkb60hYYA"
-        },
-        {
-            id: 1,
-            title: "Night",
-            image: nightImg,
-            link: "https://social.tunecore.com/linkShare?linkid=GA6i9wxuXTjXwRTKxaR9_A"
-        },
-        {
-            id: 2,
-            title: "Light",
-            image: lightImg,
-            link: "https://social.tunecore.com/linkShare?linkid=B1eAd2h9nbgGnfNU_SauQA"
-        },
-        {
-            id: 3,
-            title: "Night Light",
-            image: nightLightImg,
-            link: "https://social.tunecore.com/linkShare?linkid=nVykxYjeotVIwwNuGaFLmg"
-        },
-        {
-            id: 4,
-            title: "Tempus",
-            image: tempusImg,
-            link: "https://social.tunecore.com/linkShare?linkid=aW6w-UThLqemmCcaffTThQ"
-        },
-        {
-            id: 5,
-            title: "homeNight",
-            image: homeNightImg,
-            link: "https://social.tunecore.com/linkShare?linkid=GE42QUWmbWZGH1ZcYLrP5Q"
-        },
-        {
-            id: 6,
-            title: "WarmWinter",
-            image: warmWinterImg,
-            link: "https://social.tunecore.com/linkShare?linkid=S0BhC296BC4yx7E7WAjBCA"
-        },
-        {
-            id: 7,
-            title: "wayfarer",
-            image: wayfarerImg,
-            link: "https://social.tunecore.com/linkShare?linkid=-V22ZzKNbLI2k8DA56f9DQ"
-        },
-        {
-            id: 9,
-            title: "NightCoffe",
-            image: nightCoffeImg,
-            link: "https://social.tunecore.com/linkShare?linkid=KOhU9RvrIWFYcKPLnj4qaw"
-        },
-        {
-            id: 10,
-            title: "I'msoTired",
-            image: imsoTiredImg,
-            link: "https://social.tunecore.com/linkShare?linkid=J5onOn4Qp1Cy19la1EU7nA"
-        },
-        {
-            id: 30,
-            title: "end",
-            image: endImg,
-            link: "https://social.tunecore.com/linkShare?linkid=O-puizwiPMfojKSCAxK4kg"
-        },
-        {
-            id: 11,
-            title: "SummerFlowers",
-            image: summerFlowersImg,
-            link: "https://social.tunecore.com/linkShare?linkid=K-GrA2FZ16AaQv34P8u-xA"
-        },
-        {
-            id: 12,
-            title: "FrierensLove",
-            image: frierensLoveImg,
-            link: "https://social.tunecore.com/linkShare?linkid=4gRRBPk8o5SxeYOQJT8LCQ"
-        },
-        {
-            id: 13,
-            title: "NazettoNoKibo",
-            image: nazettoNoKiboImg,
-            link: "https://social.tunecore.com/linkShare?linkid=jRlzp5jOU_gZITpRO_qEHw"
-        },
-        {
-            id: 15,
-            title: "Past",
-            image: pastImg,
-            link: "https://social.tunecore.com/linkShare?linkid=a-t33wlJNx5S5fdpxmYHow"
-        },
-        {
-            id: 16,
-            title: "MaidCoffee",
-            image: maidCoffeeImg,
-            link: "https://social.tunecore.com/linkShare?linkid=fgzKIGPTyeA5-70MlVZJzg"
-        },
-        {
-            id: 17,
-            title: "Alone",
-            image: aloneImg,
-            link: "https://social.tunecore.com/linkShare?linkid=EswdeQu7Oc8_ZeLkznT6uQ"
-        },
-        {
-            id: 18,
-            title: "Wind",
-            image: windImg,
-            link: "https://social.tunecore.com/linkShare?linkid=Z0YL-CfmKRUJ8s3D9PJsVw"
-        },
-        {
-            id: 19,
-            title: "Nature",
-            image: natureImg,
-            link: "https://social.tunecore.com/linkShare?linkid=5B0lWq6bxzuk1mmFdBE_bQ"
-        },
-        {
-            id: 20,
-            title: "Memory",
-            image: memoryImg,
-            link: "https://social.tunecore.com/linkShare?linkid=MX1-R5iF88FPgvAtD24gIQ"
-        },
-        {
-            id: 21,
-            title: "Childhood",
-            image: ChildhoodImg,
-            link: "https://social.tunecore.com/linkShare?linkid=GF2gGI6MYC-nauuazZaCLg"
-        },
-        {
-            id: 22,
-            title: "TempusDream",
-            image: tempusDreamImg,
-            link: "https://social.tunecore.com/linkShare?linkid=uiY5SNgTE6bL8QKFqoUyIA"
-        },
-        {
-            id: 23,
-            title: "Journey",
-            image: journeyImg,
-            link: "https://social.tunecore.com/linkShare?linkid=cjgUBg-BtlCHKNLvUXMNxg"
-        },
-        {
-            id: 24,
-            title: "Train",
-            image: trainImg,
-            link: "https://social.tunecore.com/linkShare?linkid=b9acF9KBZECJW2FRi1NZxg"
-        },
-        {
-            id: 25,
-            title: "EndlessDream",
-            image: endlessDreamImg,
-            link: "https://social.tunecore.com/linkShare?linkid=_VNojT7eroauUaMTJ1m_rw"
-        },
-        {
-            id: 26,
-            title: "Fantasy",
-            image: fantasyImg,
-            link: "https://social.tunecore.com/linkShare?linkid=nCRW0TEeXp1gA-FrCM98bA"
-        },
-        {
-            id: 27,
-            title: "IJustWanttoBeAlone",
-            image: iJustWanttoBeAloneImg,
-            link: "https://social.tunecore.com/linkShare?linkid=GIodo7PBVsYnNtQZv5hbyQ"
-        },
-        {
-            id: 28,
-            title: "Hime",
-            image: himeImg,
-            link: "https://social.tunecore.com/linkShare?linkid=9kNdXkHPo753A_HvIr5igA"
-        },
-    ])
+    const [songs, setSongs] = useState(DEFAULT_SONGS);
+
+    // Listen to Firestore for real-time updates
+    useEffect(() => {
+        const unsubscribe = onSnapshot(
+            collection(db, "releases"),
+            (snapshot) => {
+                if (snapshot.empty) return; // If completely empty, just show defaults
+                
+                const firestoreItems = [];
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    
+                    if (data.isLegacy) {
+                        // Find the local song to get the correct Vite image path
+                        const localSong = DEFAULT_SONGS.find(s => s.id === data.localId);
+                        if (localSong) {
+                            firestoreItems.push({
+                                id: doc.id,
+                                title: data.title || localSong.title,
+                                image: localSong.image, // Use local imported image
+                                link: localSong.link,
+                                order: data.order ?? 999,
+                            });
+                        }
+                    } else {
+                        // Normal uploaded release
+                        firestoreItems.push({
+                            id: doc.id,
+                            title: data.title,
+                            image: optimizeCloudinaryUrl(data.imageUrl, 400), // Optimize image speed
+                            link: data.link || "#",
+                            order: data.order ?? 999,
+                        });
+                    }
+                });
+                
+                firestoreItems.sort((a, b) => a.order - b.order);
+                setSongs(firestoreItems);
+            },
+            (error) => {
+                console.log("Firestore listener error:", error.message);
+            }
+        );
+        return () => unsubscribe();
+    }, []);
 
     return (
         <>

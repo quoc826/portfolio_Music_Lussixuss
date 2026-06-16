@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { FaSpotify, FaYoutube, FaSoundcloud, FaApple } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
 import "../CSS/Header.css";
 
 function Header() {
+    const { user, isAdmin, loginWithGoogle, logout } = useAuth();
+
     return (
         <header className="header-container" role="banner">
            
@@ -40,6 +43,17 @@ function Header() {
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/release">Release</Link></li>
                     <li><Link to="/contact">Infor</Link></li>
+                    <li><Link to="/social">Social</Link></li>
+                    {isAdmin && (
+                        <li><Link to="/admin" className="admin-link">Admin</Link></li>
+                    )}
+                    {user && (
+                        <li>
+                            <button onClick={logout} className="auth-btn" aria-label="Logout" title={user.email}>
+                                {isAdmin ? "👑" : "🚪"}
+                            </button>
+                        </li>
+                    )}
                 </ul>
             </nav>
         </header>

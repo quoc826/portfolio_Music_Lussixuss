@@ -24,10 +24,11 @@
     align-items: center;
     width: 100%;
     max-width: 450px;
-    gap: 25px;
+    gap: 30px;
 }
 
 .img-container {
+    position: relative; /* Added relative positioning */
     width: 100%;
     aspect-ratio: 1 / 1;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
@@ -42,57 +43,197 @@
     display: block;
 }
 
-.controls-container {
+/* SoundCloud Wave Styling */
+.soundcloud-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 3px;
+    padding: 0 20px 20px;
+    box-sizing: border-box;
+    z-index: 2;
+    pointer-events: none; /* Let clicks pass through if needed */
+    animation: fadeInWave 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+.wave-bar {
+    flex: 1;
+    max-width: 5px;
+    background: #a200ff;
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 0 8px rgba(162, 0, 255, 0.6);
+    animation: wave-pulse 1s ease-in-out infinite alternate;
+    transform-origin: bottom;
+}
+
+@keyframes fadeInWave {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes wave-pulse {
+    0% {
+        transform: scaleY(0.35);
+        opacity: 0.6;
+        background: #a200ff;
+        box-shadow: 0 0 4px rgba(162, 0, 255, 0.4);
+    }
+    100% {
+        transform: scaleY(1.3);
+        opacity: 1;
+        background: #d880ff;
+        box-shadow: 0 0 12px rgba(216, 128, 255, 0.8);
+    }
+}
+
+/* Play Button (shown when audio exists) */
 .play-btn {
-    width: 65px;
-    height: 65px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background-color: #db6e0f;
+    background: linear-gradient(135deg, #db6e0f, #e88026);
     color: white;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(219, 110, 15, 0.4);
-    transition: transform 0.2s ease, background-color 0.3s ease;
-}
-
-.play-btn .icon-play {
-    margin-left: 3px;
+    font-size: 22px;
+    box-shadow: 0 4px 20px rgba(219, 110, 15, 0.4);
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
 }
 
 .play-btn:hover {
-    transform: scale(1.1);
-    background-color: #e88026;
+    transform: scale(1.12);
+    box-shadow: 0 6px 28px rgba(219, 110, 15, 0.5);
 }
 
-.start-btn {
-    width: 120px;
-    height: 40px;
+/* Platform Streaming Buttons */
+.platforms-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff !important;
-    text-decoration: none;
-    font-weight: 500;
-    text-transform: uppercase;
-    font-size: 14px;
-    letter-spacing: 2px;
-    transition: all 0.3s ease;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-.start-btn:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: #ffffff;
+.platform-btn {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.platform-btn svg {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    z-index: 1;
+}
+
+.platform-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.platform-btn:hover {
+    transform: translateY(-4px) scale(1.1);
+    border-color: transparent;
+}
+
+.platform-btn:hover svg {
+    transform: scale(1.15);
+}
+
+/* Spotify */
+.platform-spotify {
+    color: #1DB954;
+}
+.platform-spotify::before {
+    background: radial-gradient(circle, rgba(29, 185, 84, 0.25) 0%, transparent 70%);
+}
+.platform-spotify:hover {
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.4), 0 8px 25px rgba(29, 185, 84, 0.2);
+    background: rgba(29, 185, 84, 0.15);
+}
+.platform-spotify:hover::before {
+    opacity: 1;
+}
+
+/* Apple Music */
+.platform-apple {
+    color: #FA2D48;
+}
+.platform-apple::before {
+    background: radial-gradient(circle, rgba(250, 45, 72, 0.25) 0%, transparent 70%);
+}
+.platform-apple:hover {
+    box-shadow: 0 0 20px rgba(250, 45, 72, 0.4), 0 8px 25px rgba(250, 45, 72, 0.2);
+    background: rgba(250, 45, 72, 0.15);
+}
+.platform-apple:hover::before {
+    opacity: 1;
+}
+
+/* YouTube Music */
+.platform-youtube {
+    color: #FF0000;
+}
+.platform-youtube::before {
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.25) 0%, transparent 70%);
+}
+.platform-youtube:hover {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4), 0 8px 25px rgba(255, 0, 0, 0.2);
+    background: rgba(255, 0, 0, 0.15);
+}
+.platform-youtube:hover::before {
+    opacity: 1;
+}
+
+/* SoundCloud */
+.platform-soundcloud {
+    color: #FF5500;
+    background: rgba(255, 255, 255, 0.15); /* Brighter glass background */
+    border-color: rgba(255, 255, 255, 0.3); /* Brighter border */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.18); /* White glowing backdrop */
+}
+.platform-soundcloud::before {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, transparent 70%);
+}
+.platform-soundcloud:hover {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.5), 0 8px 30px rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+.platform-soundcloud:hover::before {
+    opacity: 1;
 }
 
 /* animation */
@@ -100,9 +241,10 @@
     --animate-duration: 1.5s;
 }
 
-.animate__bounceIn {
+.animate__fadeInUp {
     animation-duration: 1s;
-    animation-delay: 1.8s;
+    animation-delay: 1.2s;
+    animation-fill-mode: both;
 }
 
 /* Responsive Design */
@@ -115,19 +257,17 @@
 
     .home-card {
         max-width: 400px;
-        gap: 20px;
+        gap: 25px;
     }
 
-    .play-btn {
-        width: 60px;
-        height: 60px;
-        font-size: 24px;
+    .platform-btn {
+        width: 56px;
+        height: 56px;
     }
 
-    .start-btn {
-        width: 110px;
-        height: 36px;
-        font-size: 12px;
+    .platform-btn svg {
+        width: 27px;
+        height: 27px;
     }
 }
 
@@ -146,27 +286,25 @@
     .home-card {
         max-width: 100%;
         width: 100%;
-        gap: 20px;
+        gap: 22px;
     }
 
     .img-container {
         max-width: 350px;
     }
 
-    .controls-container {
-        gap: 12px;
+    .platforms-container {
+        gap: 16px;
     }
 
-    .play-btn {
-        width: 55px;
-        height: 55px;
-        font-size: 22px;
+    .platform-btn {
+        width: 52px;
+        height: 52px;
     }
 
-    .start-btn {
-        width: 100px;
-        height: 34px;
-        font-size: 11px;
+    .platform-btn svg {
+        width: 24px;
+        height: 24px;
     }
 }
 
@@ -183,7 +321,7 @@
     }
 
     .home-card {
-        gap: 15px;
+        gap: 18px;
     }
 
     .img-container {
@@ -191,21 +329,17 @@
         border-radius: 8px;
     }
 
-    .controls-container {
-        gap: 10px;
+    .platforms-container {
+        gap: 14px;
     }
 
-    .play-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-        box-shadow: 0 4px 10px rgba(219, 110, 15, 0.3);
+    .platform-btn {
+        width: 48px;
+        height: 48px;
     }
 
-    .start-btn {
-        width: 90px;
-        height: 32px;
-        font-size: 10px;
-        letter-spacing: 1px;
+    .platform-btn svg {
+        width: 22px;
+        height: 22px;
     }
 }

@@ -1,0 +1,473 @@
+.admin-page {
+    padding-top: 120px;
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+.admin-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 560px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.admin-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 20px 0;
+}
+
+.admin-subtitle {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0 0 24px 0;
+    text-align: center;
+}
+
+/* Tabs */
+.admin-tabs {
+    display: flex;
+    gap: 4px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.admin-tab {
+    flex: 1;
+    padding: 10px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 9px;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.admin-tab:hover {
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.admin-tab.active {
+    background: rgba(219, 110, 15, 0.2);
+    color: #e88026;
+    box-shadow: 0 2px 10px rgba(219, 110, 15, 0.15);
+}
+
+/* Section */
+.admin-section {
+    width: 100%;
+}
+
+.admin-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 16px 0;
+}
+
+/* Current Song Preview */
+.admin-current {
+    width: 100%;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    margin-bottom: 24px;
+    box-sizing: border-box;
+}
+
+.admin-current h3 {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 12px 0;
+    font-weight: 500;
+}
+
+.admin-current-preview {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.admin-current-preview img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.admin-current-preview span {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Form */
+.admin-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.admin-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-field label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.admin-field input[type="text"],
+.admin-field input[type="url"] {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+.admin-field input[type="text"]:focus,
+.admin-field input[type="url"]:focus {
+    border-color: rgba(219, 110, 15, 0.6);
+    box-shadow: 0 0 0 3px rgba(219, 110, 15, 0.1);
+}
+
+.admin-field input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+/* File Input */
+.admin-file-input {
+    position: relative;
+    cursor: pointer;
+}
+
+.admin-file-input input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.admin-file-label {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.admin-file-input:hover .admin-file-label {
+    border-color: rgba(219, 110, 15, 0.5);
+    background: rgba(219, 110, 15, 0.05);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Image Preview */
+.admin-image-preview {
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Submit Button */
+.admin-submit {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #db6e0f, #e88026);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 6px;
+}
+
+.admin-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(219, 110, 15, 0.35);
+}
+
+.admin-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Message */
+.admin-message {
+    text-align: center;
+    font-size: 0.9rem;
+    margin: 8px 0 0 0;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* ==================== RELEASE LIST ==================== */
+.admin-release-list {
+    width: 100%;
+    margin-top: 32px;
+}
+
+.admin-release-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: background 0.2s ease;
+}
+
+.admin-release-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* Order controls */
+.admin-release-order {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 32px;
+}
+
+.order-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+.order-btn:hover:not(:disabled) {
+    color: #e88026;
+    background: rgba(219, 110, 15, 0.1);
+}
+
+.order-btn:disabled {
+    opacity: 0.2;
+    cursor: default;
+}
+
+.order-input {
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0;
+    margin: 2px 0;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.order-input:focus {
+    border-color: #db6e0f;
+    background: rgba(219, 110, 15, 0.1);
+    color: #ffffff;
+}
+
+/* Hide spin buttons for input type number */
+.order-input::-webkit-outer-spin-button,
+.order-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.order-input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Release info */
+.admin-release-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-release-thumb {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.admin-release-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Delete button */
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    opacity: 0.4;
+    flex-shrink: 0;
+}
+
+.delete-btn:hover {
+    opacity: 1;
+    background: rgba(255, 60, 60, 0.1);
+}
+
+/* Loading / Empty */
+.admin-loading,
+.admin-empty {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.9rem;
+    padding: 30px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-page {
+        padding-top: 100px;
+        padding-bottom: 30px;
+    }
+
+    .admin-wrapper {
+        padding: 0 15px;
+        max-width: 100%;
+    }
+
+    .admin-title {
+        font-size: 1.5rem;
+    }
+
+    .admin-tab {
+        font-size: 0.85rem;
+        padding: 9px 12px;
+    }
+
+    .admin-release-item {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+
+    .admin-release-thumb {
+        width: 38px;
+        height: 38px;
+    }
+
+    .admin-release-name {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-page {
+        padding-top: 90px;
+    }
+
+    .admin-wrapper {
+        padding: 0 10px;
+    }
+
+    .admin-title {
+        font-size: 1.3rem;
+    }
+
+    .admin-tab {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+
+    .admin-field input[type="text"],
+    .admin-field input[type="url"] {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+
+    .admin-submit {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+    .admin-release-item {
+        padding: 8px 10px;
+        gap: 8px;
+    }
+
+    .admin-release-thumb {
+        width: 34px;
+        height: 34px;
+        border-radius: 6px;
+    }
+
+    .admin-release-name {
+        font-size: 0.8rem;
+    }
+
+    .order-btn {
+        font-size: 9px;
+    }
+}

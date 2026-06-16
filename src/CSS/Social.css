@@ -1,0 +1,253 @@
+.social-page {
+    padding-top: 120px;
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+.social-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.social-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+    letter-spacing: 1px;
+}
+
+.social-subtitle {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 40px 0;
+    letter-spacing: 0.5px;
+}
+
+/* Social Cards */
+.social-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.social-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation-fill-mode: both;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--brand-color), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.social-card:hover {
+    transform: translateX(6px);
+    border-color: var(--brand-color);
+    box-shadow: 0 0 30px color-mix(in srgb, var(--brand-color) 25%, transparent),
+                0 10px 30px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+.social-card:hover::before {
+    opacity: 0.08;
+}
+
+/* Icon */
+.social-icon {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--brand-color);
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.social-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.social-card:hover .social-icon {
+    background: color-mix(in srgb, var(--brand-color) 15%, transparent);
+    border-color: color-mix(in srgb, var(--brand-color) 40%, transparent);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--brand-color) 30%, transparent);
+}
+
+/* Info */
+.social-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+.social-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.social-cta {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.35);
+    transition: color 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.social-card:hover .social-cta {
+    color: var(--brand-color);
+}
+
+/* Animation overrides */
+.social-cards .animate__animated {
+    --animate-duration: 0.8s;
+}
+
+/* Responsive */
+/* Tablet */
+@media (max-width: 1024px) {
+    .social-page {
+        padding-top: 110px;
+        padding-bottom: 40px;
+    }
+
+    .social-wrapper {
+        max-width: 460px;
+    }
+
+    .social-title {
+        font-size: 1.8rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .social-page {
+        padding-top: 100px;
+        padding-bottom: 30px;
+    }
+
+    .social-wrapper {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .social-title {
+        font-size: 1.6rem;
+    }
+
+    .social-subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 30px;
+    }
+
+    .social-card {
+        padding: 16px 20px;
+        gap: 16px;
+    }
+
+    .social-icon {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        border-radius: 12px;
+    }
+
+    .social-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .social-name {
+        font-size: 1rem;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    .social-page {
+        padding-top: 90px;
+        padding-bottom: 25px;
+    }
+
+    .social-wrapper {
+        padding: 0 10px;
+    }
+
+    .social-title {
+        font-size: 1.4rem;
+    }
+
+    .social-subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 25px;
+    }
+
+    .social-cards {
+        gap: 12px;
+    }
+
+    .social-card {
+        padding: 14px 16px;
+        gap: 14px;
+        border-radius: 12px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        border-radius: 10px;
+    }
+
+    .social-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .social-name {
+        font-size: 0.95rem;
+    }
+
+    .social-cta {
+        font-size: 0.75rem;
+    }
+}
