@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { onAuthStateChanged, signInWithRedirect, getRedirectResult, signOut } from "firebase/auth";
+import { onAuthStateChanged, signInWithPopup, signInWithRedirect, getRedirectResult, signOut } from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
 
 const AuthContext = createContext();
@@ -31,11 +31,30 @@ export function AuthProvider({ children }) {
 
     const loginWithGoogle = async () => {
         try {
-            // Use redirect instead of popup to bypass COOP blockers
-            await signInWithRedirect(auth, googleProvider);
+            const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+            if (isLocalhost) {
+                // Popups work fine locally if not blocked; bypasses iframe third-party cookie issues on localhost
+                const result = await signInWithPopup(auth, googleProvider);
+                return result.user;
+            } else {
+                // Redirect is safer on production to avoid popup blockers and COOP issues
+                await signInWithRedirect(auth, googleProvider);
+            }
         } catch (error) {
-            console.error("Login error:", error);
-            throw error;
+            console.error("Primary login method failed, trying fallback:", error);
+            try {
+                // If primary method fails (e.g. popup blocked on localhost), attempt the alternative
+                const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+                if (isLocalhost) {
+                    await signInWithRedirect(auth, googleProvider);
+                } else {
+                    const result = await signInWithPopup(auth, googleProvider);
+                    return result.user;
+                }
+            } catch (fallbackError) {
+                console.error("All login methods failed:", fallbackError);
+                throw fallbackError;
+            }
         }
     };
 

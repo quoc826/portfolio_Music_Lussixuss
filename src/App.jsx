@@ -12,37 +12,47 @@ import ContactForm from './component/Infor';
 import Social from './component/Social';
 import AdminPanel from './component/AdminPanel';
 import './App.css';
+import defaultBg from './assets/BgInfor.jpg';
 
 function App() {
-  const [bgUrl, setBgUrl] = useState("");
+  const [loadedBg, setLoadedBg] = useState("");
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(doc(db, "settings", "background"), (docSnap) => {
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        if (data.imageUrl) {
-          // Optimize background to 1920px max width to load fast
-          setBgUrl(optimizeCloudinaryUrl(data.imageUrl, 1920));
-        } else {
-          setBgUrl("");
+    const unsubscribe = onSnapshot(
+      doc(db, "settings", "background"),
+      (docSnap) => {
+        let targetUrl = defaultBg;
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          if (data.imageUrl) {
+            targetUrl = optimizeCloudinaryUrl(data.imageUrl, 1920);
+          }
         }
-      } else {
-        setBgUrl("");
+
+        // Pre-load the background image
+        const img = new Image();
+        img.src = targetUrl;
+        img.onload = () => {
+          setLoadedBg(targetUrl);
+        };
+        img.onerror = () => {
+          setLoadedBg(defaultBg);
+        };
+      },
+      (error) => {
+        console.error("Firestore background listener error:", error.message);
+        setLoadedBg(defaultBg); // Use default background on error
       }
-    });
+    );
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
     const root = document.getElementById("root");
-    if (root) {
-      if (bgUrl) {
-        root.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${bgUrl})`;
-      } else {
-        root.style.backgroundImage = ""; // Revert to CSS default
-      }
+    if (root && loadedBg) {
+      root.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${loadedBg})`;
     }
-  }, [bgUrl]);
+  }, [loadedBg]);
   return (
     <AuthProvider>
       <div className="app-container">

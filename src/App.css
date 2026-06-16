@@ -10,14 +10,12 @@
   padding: 0;
   width: 100%;
   min-height: 100vh; 
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
-                    url('./assets/BgInfor.jpg'); 
-  
+  background-color: #0c0705; 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat; 
-  
   background-attachment: fixed; 
+  transition: background-image 0.4s ease-in-out;
 }
 
 .app-container {
