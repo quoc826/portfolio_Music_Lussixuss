@@ -4,6 +4,7 @@ import SEOHead from "./SEOHead";
 import { db } from "../firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 import { optimizeCloudinaryUrl } from "../cloudinary";
+import AnimeLoader from "./AnimeLoader";
 
 // Default fallback images
 import nightImg from "../assets/imageMusic/night.jpg";
@@ -69,13 +70,18 @@ export const DEFAULT_SONGS = [
 
 function Release() {
     const [songs, setSongs] = useState(DEFAULT_SONGS);
+    const [loading, setLoading] = useState(true);
 
     // Listen to Firestore for real-time updates
     useEffect(() => {
         const unsubscribe = onSnapshot(
             collection(db, "releases"),
             (snapshot) => {
-                if (snapshot.empty) return; // If completely empty, just show defaults
+                if (snapshot.empty) {
+                    setSongs(DEFAULT_SONGS);
+                    setLoading(false);
+                    return;
+                }
                 
                 const firestoreItems = [];
                 snapshot.forEach((doc) => {
@@ -107,13 +113,20 @@ function Release() {
                 
                 firestoreItems.sort((a, b) => a.order - b.order);
                 setSongs(firestoreItems);
+                setLoading(false);
             },
             (error) => {
                 console.log("Firestore listener error:", error.message);
+                setSongs(DEFAULT_SONGS);
+                setLoading(false);
             }
         );
         return () => unsubscribe();
     }, []);
+
+    if (loading) {
+        return <AnimeLoader />;
+    }
 
     return (
         <>

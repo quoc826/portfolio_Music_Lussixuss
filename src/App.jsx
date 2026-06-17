@@ -15,33 +15,45 @@ import './App.css';
 import defaultBg from './assets/BgInfor.jpg';
 
 function App() {
-  const [loadedBg, setLoadedBg] = useState("");
+  const [loadedBg, setLoadedBg] = useState(defaultBg);
+  const [showVideoBg, setShowVideoBg] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
       doc(db, "settings", "background"),
       (docSnap) => {
         let targetUrl = defaultBg;
+        let isCustom = false;
         if (docSnap.exists()) {
           const data = docSnap.data();
           if (data.imageUrl) {
             targetUrl = optimizeCloudinaryUrl(data.imageUrl, 1920);
+            isCustom = true;
           }
         }
 
-        // Pre-load the background image
+        if (!isCustom) {
+          setLoadedBg(defaultBg);
+          setShowVideoBg(true);
+          return;
+        }
+
+        // Pre-load the custom background image
         const img = new Image();
         img.src = targetUrl;
         img.onload = () => {
           setLoadedBg(targetUrl);
+          setShowVideoBg(false);
         };
         img.onerror = () => {
           setLoadedBg(defaultBg);
+          setShowVideoBg(true);
         };
       },
       (error) => {
         console.error("Firestore background listener error:", error.message);
         setLoadedBg(defaultBg); // Use default background on error
+        setShowVideoBg(true);
       }
     );
     return () => unsubscribe();
@@ -56,6 +68,20 @@ function App() {
   return (
     <AuthProvider>
       <div className="app-container">
+        {showVideoBg && (
+          <>
+            <video 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              className="video-background"
+            >
+              <source src="/lonely-night-train-moewalls-com.mp4" type="video/mp4" />
+            </video>
+            <div className="video-overlay" />
+          </>
+        )}
         <Header />
         
         <main className="main-content">

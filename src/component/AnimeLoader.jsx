@@ -3,13 +3,12 @@ import "../CSS/AnimeLoader.css";
 export default function AnimeLoader() {
     return (
         <div className="anime-loader-container">
-            <div className="anime-dot-loader">
-                <span className="loader-text">Loading</span>
-                <span className="bounce-dot">.</span>
-                <span className="bounce-dot">.</span>
-                <span className="bounce-dot">.</span>
-            </div>
-            <p className="anime-loader-subtitle">読み込み中</p>
+            <dotlottie-wc 
+                src="https://lottie.host/a2cd38f3-acc1-445b-9d60-1da06ad0c078/zSjZuNS6MU.lottie" 
+                style={{ width: "300px", height: "300px" }} 
+                autoplay 
+                loop
+            />
         </div>
     );
 }

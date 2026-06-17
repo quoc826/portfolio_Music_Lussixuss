@@ -5,6 +5,7 @@ import { db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { optimizeCloudinaryUrl } from "../cloudinary";
 import 'animate.css';
+import AnimeLoader from "./AnimeLoader";
 import "../CSS/Home.css";
 
 // Default fallback data
@@ -53,36 +54,33 @@ function Home() {
                     const data = docSnap.data();
                     const targetImage = data.imageUrl ? optimizeCloudinaryUrl(data.imageUrl, 600) : DEFAULT_SONG.image;
 
-                    const img = new Image();
-                    img.src = targetImage;
-                    
-                    const handleComplete = () => {
-                        setSong({
-                            id: 1,
-                            title: data.title || DEFAULT_SONG.title,
-                            image: targetImage,
-                            audio: data.audioUrl || "", // Fetch audioUrl from Firestore
-                            spotify: data.spotify || DEFAULT_SONG.spotify,
-                            appleMusic: data.appleMusic || DEFAULT_SONG.appleMusic,
-                            youtubeMusic: data.youtubeMusic || DEFAULT_SONG.youtubeMusic,
-                            soundcloud: data.soundcloud || DEFAULT_SONG.soundcloud,
-                        });
-                        setLoading(false);
-                    };
-
-                    img.onload = handleComplete;
-                    img.onerror = handleComplete; // Proceed even if image load fails
+                    setSong({
+                        id: 1,
+                        title: data.title || DEFAULT_SONG.title,
+                        image: targetImage,
+                        audio: data.audioUrl || "", // Fetch audioUrl from Firestore
+                        spotify: data.spotify || DEFAULT_SONG.spotify,
+                        appleMusic: data.appleMusic || DEFAULT_SONG.appleMusic,
+                        youtubeMusic: data.youtubeMusic || DEFAULT_SONG.youtubeMusic,
+                        soundcloud: data.soundcloud || DEFAULT_SONG.soundcloud,
+                    });
                 } else {
-                    setLoading(false);
+                    setSong(DEFAULT_SONG);
                 }
+                setLoading(false);
             },
             (error) => {
                 console.log("Firestore listener error (using defaults):", error.message);
+                setSong(DEFAULT_SONG);
                 setLoading(false);
             }
         );
         return () => unsubscribe();
     }, []);
+
+    if (loading) {
+        return <AnimeLoader />;
+    }
 
     return (
         <>
@@ -93,10 +91,9 @@ function Home() {
             />
             <div className="home-container">
                 <div className="home-wrapper">
-                    {!loading && (
-                        <article className="home-card" itemScope itemType="https://schema.org/MusicRecording">
+                    <article className="home-card" itemScope itemType="https://schema.org/MusicRecording">
 
-                            <div className="img-container animate__animated animate__backInDown" style={{ position: "relative" }}>
+                            <div className="img-container animate__animated animate__fadeInDown" style={{ position: "relative" }}>
                                 <img
                                     src={song.image}
                                     alt={`${song.title} - Lussixuss lofi music track`}
@@ -174,7 +171,6 @@ function Home() {
                             <meta itemProp="byArtist" content="Lussixuss" />
                             <meta itemProp="genre" content="Lofi" />
                         </article>
-                    )}
                 </div>
 
                 {/* SEO Content - hidden visually, readable by search engines */}

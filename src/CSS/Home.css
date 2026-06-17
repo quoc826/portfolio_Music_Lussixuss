@@ -238,12 +238,22 @@
 
 /* animation */
 .animate__animated {
-    --animate-duration: 1.5s;
+    --animate-duration: 0.5s;
+}
+
+.img-container.animate__animated {
+    animation-duration: 0.5s;
+}
+
+.play-btn.animate__animated {
+    animation-duration: 0.4s;
+    animation-delay: 0.15s;
+    animation-fill-mode: both;
 }
 
 .animate__fadeInUp {
-    animation-duration: 1s;
-    animation-delay: 1.2s;
+    animation-duration: 0.5s;
+    animation-delay: 0.3s;
     animation-fill-mode: both;
 }
 
