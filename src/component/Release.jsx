@@ -68,9 +68,23 @@ export const DEFAULT_SONGS = [
     { id: "d28", title: "Hime", image: himeImg, link: "https://social.tunecore.com/linkShare?linkid=9kNdXkHPo753A_HvIr5igA" },
 ];
 
+const getCachedReleases = () => {
+    try {
+        const cached = localStorage.getItem("cached_releases");
+        if (cached) {
+            return JSON.parse(cached);
+        }
+    } catch (e) {
+        console.error("Error reading cached releases:", e);
+    }
+    return DEFAULT_SONGS;
+};
+
 function Release() {
-    const [songs, setSongs] = useState(DEFAULT_SONGS);
-    const [loading, setLoading] = useState(true);
+    const [songs, setSongs] = useState(getCachedReleases);
+    const [loading, setLoading] = useState(() => {
+        return !localStorage.getItem("cached_releases");
+    });
 
     // Listen to Firestore for real-time updates
     useEffect(() => {
@@ -79,6 +93,7 @@ function Release() {
             (snapshot) => {
                 if (snapshot.empty) {
                     setSongs(DEFAULT_SONGS);
+                    localStorage.removeItem("cached_releases");
                     setLoading(false);
                     return;
                 }
@@ -113,11 +128,11 @@ function Release() {
                 
                 firestoreItems.sort((a, b) => a.order - b.order);
                 setSongs(firestoreItems);
+                localStorage.setItem("cached_releases", JSON.stringify(firestoreItems));
                 setLoading(false);
             },
             (error) => {
                 console.log("Firestore listener error:", error.message);
-                setSongs(DEFAULT_SONGS);
                 setLoading(false);
             }
         );

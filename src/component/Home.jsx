@@ -19,10 +19,24 @@ const DEFAULT_SONG = {
     soundcloud: "https://soundcloud.com/lussixuss",
 };
 
+const getCachedSong = () => {
+    try {
+        const cached = localStorage.getItem("cached_home_song");
+        if (cached) {
+            return JSON.parse(cached);
+        }
+    } catch (e) {
+        console.error("Error reading cached song:", e);
+    }
+    return DEFAULT_SONG;
+};
+
 function Home() {
-    const [song, setSong] = useState(DEFAULT_SONG);
+    const [song, setSong] = useState(getCachedSong);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(() => {
+        return !localStorage.getItem("cached_home_song");
+    });
     const audioRef = useRef(null);
 
     // Toggle Play/Pause
@@ -54,7 +68,7 @@ function Home() {
                     const data = docSnap.data();
                     const targetImage = data.imageUrl ? optimizeCloudinaryUrl(data.imageUrl, 600) : DEFAULT_SONG.image;
 
-                    setSong({
+                    const updatedSong = {
                         id: 1,
                         title: data.title || DEFAULT_SONG.title,
                         image: targetImage,
@@ -63,15 +77,18 @@ function Home() {
                         appleMusic: data.appleMusic || DEFAULT_SONG.appleMusic,
                         youtubeMusic: data.youtubeMusic || DEFAULT_SONG.youtubeMusic,
                         soundcloud: data.soundcloud || DEFAULT_SONG.soundcloud,
-                    });
+                    };
+
+                    setSong(updatedSong);
+                    localStorage.setItem("cached_home_song", JSON.stringify(updatedSong));
                 } else {
                     setSong(DEFAULT_SONG);
+                    localStorage.removeItem("cached_home_song");
                 }
                 setLoading(false);
             },
             (error) => {
                 console.log("Firestore listener error (using defaults):", error.message);
-                setSong(DEFAULT_SONG);
                 setLoading(false);
             }
         );
