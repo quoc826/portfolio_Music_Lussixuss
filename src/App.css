@@ -48,7 +48,6 @@
   pointer-events: none;
 }
 
-
 @media (max-width: 1024px) {
   #root {
     background-attachment: scroll; 

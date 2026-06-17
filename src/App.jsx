@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { db } from './firebase';
@@ -11,12 +11,14 @@ import Release from './component/Release';
 import ContactForm from './component/Infor';
 import Social from './component/Social';
 import AdminPanel from './component/AdminPanel';
+import AnimeLoader from './component/AnimeLoader';
 import './App.css';
 import defaultBg from './assets/BgInfor.jpg';
 
 function App() {
   const [loadedBg, setLoadedBg] = useState(defaultBg);
   const [showVideoBg, setShowVideoBg] = useState(true);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -69,12 +71,23 @@ function App() {
       }
     }
   }, [loadedBg, showVideoBg]);
+
+  // Prompt the video to play programmatically immediately
+  useEffect(() => {
+    if (showVideoBg && videoRef.current) {
+      videoRef.current.play().catch((err) => {
+        console.log("Autoplay check:", err.message);
+      });
+    }
+  }, [showVideoBg]);
+
   return (
     <AuthProvider>
       <div className="app-container">
         {showVideoBg && (
           <>
             <video 
+              ref={videoRef}
               autoPlay 
               loop 
               muted 
@@ -101,7 +114,7 @@ function App() {
         <Footer/>
       </div>
     </AuthProvider>
-  )
+  );
 }
 
 export default App;
