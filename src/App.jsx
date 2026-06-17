@@ -61,10 +61,14 @@ function App() {
 
   useEffect(() => {
     const root = document.getElementById("root");
-    if (root && loadedBg) {
-      root.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${loadedBg})`;
+    if (root) {
+      if (showVideoBg) {
+        root.style.backgroundImage = "none";
+      } else if (loadedBg) {
+        root.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${loadedBg})`;
+      }
     }
-  }, [loadedBg]);
+  }, [loadedBg, showVideoBg]);
   return (
     <AuthProvider>
       <div className="app-container">
