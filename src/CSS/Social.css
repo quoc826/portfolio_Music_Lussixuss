@@ -251,3 +251,54 @@
         font-size: 0.75rem;
     }
 }
+
+/* Ultra-wide / Large Desktop Screens */
+@media (min-width: 1600px) {
+    .social-page {
+        padding-top: 150px;
+        padding-bottom: 70px;
+    }
+
+    .social-wrapper {
+        max-width: 650px;
+    }
+
+    .social-title {
+        font-size: 2.6rem;
+    }
+
+    .social-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 50px;
+    }
+
+    .social-cards {
+        gap: 20px;
+    }
+
+    .social-card {
+        padding: 26px 32px;
+        gap: 24px;
+        border-radius: 20px;
+    }
+
+    .social-icon {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+        border-radius: 16px;
+    }
+
+    .social-icon svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .social-name {
+        font-size: 1.3rem;
+    }
+
+    .social-cta {
+        font-size: 0.9rem;
+    }
+}

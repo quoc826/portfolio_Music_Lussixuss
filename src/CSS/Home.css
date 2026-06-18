@@ -353,3 +353,45 @@
         height: 22px;
     }
 }
+
+/* Ultra-wide / Large Desktop Screens */
+@media (min-width: 1600px) {
+    .home-container {
+        padding-top: 150px;
+        padding-bottom: 70px;
+    }
+
+    .home-card {
+        max-width: 550px;
+        gap: 40px;
+    }
+
+    .img-container {
+        border-radius: 14px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .soundcloud-wave {
+        height: 150px;
+    }
+
+    .play-btn {
+        width: 76px;
+        height: 76px;
+        font-size: 28px;
+    }
+
+    .platforms-container {
+        gap: 30px;
+    }
+
+    .platform-btn {
+        width: 76px;
+        height: 76px;
+    }
+
+    .platform-btn svg {
+        width: 36px;
+        height: 36px;
+    }
+}

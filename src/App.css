@@ -51,17 +51,29 @@
 @media (max-width: 1024px) {
   #root {
     background-attachment: scroll; 
+    background-position: right center;
+  }
+  .video-background {
+    object-position: right center;
   }
 }
 
 @media (max-width: 768px) {
   #root {
     background-attachment: scroll;
+    background-position: right center;
+  }
+  .video-background {
+    object-position: right center;
   }
 }
 
 @media (max-width: 480px) {
   #root {
     background-attachment: scroll;
+    background-position: right center;
+  }
+  .video-background {
+    object-position: right center;
   }
 }

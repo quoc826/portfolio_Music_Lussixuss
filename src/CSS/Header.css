@@ -212,3 +212,36 @@
         gap: 8px;
     }
 }
+
+/* Ultra-wide / Large Desktop Screens */
+@media (min-width: 1600px) {
+    .header-container {
+        padding: 22px 70px;
+    }
+
+    .header-container ul {
+        gap: 35px;
+    }
+
+    .header-container a,
+    .header-container li {
+        font-size: 18px;
+    }
+
+    .Logo ul li svg {
+        transform: scale(1.4);
+    }
+
+    .Logo ul li a:hover svg {
+        transform: scale(1.6);
+    }
+
+    .Name h3 {
+        font-size: 30px;
+        letter-spacing: 7px;
+    }
+
+    .auth-btn {
+        font-size: 18px;
+    }
+}

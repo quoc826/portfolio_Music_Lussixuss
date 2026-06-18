@@ -158,3 +158,23 @@
     opacity: 0;
     pointer-events: none;
 }
+
+/* Ultra-wide / Large Desktop Screens */
+@media (min-width: 1600px) {
+    .release-container {
+        padding: 160px 40px 80px;
+    }
+
+    .release-wrapper {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 1600px;
+    }
+
+    .song-overlay {
+        width: 130px;
+        height: 48px;
+        font-size: 16px;
+        bottom: 25px;
+    }
+}
