@@ -42,6 +42,7 @@ function Header() {
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/release">Release</Link></li>
+                    <li><Link to="/sound-design">Sound Design</Link></li>
                     <li><Link to="/contact">Infor</Link></li>
                     <li><Link to="/social">Social</Link></li>
                     {isAdmin && (

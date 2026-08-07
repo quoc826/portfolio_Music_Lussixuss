@@ -12,6 +12,7 @@ import ContactForm from './component/Infor';
 import Social from './component/Social';
 import AdminPanel from './component/AdminPanel';
 import AnimeLoader from './component/AnimeLoader';
+import SoundDesign from './component/SoundDesign';
 import './App.css';
 import defaultBg from './assets/BgInfor.jpg';
 
@@ -105,6 +106,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home/>} />
             <Route path='/release' element={<Release/>} />
+            <Route path='/sound-design' element={<SoundDesign />} />
             <Route path='/contact' element={<ContactForm />} />
             <Route path='/social' element={<Social />} />
             <Route path='/admin' element={<AdminPanel />} />
