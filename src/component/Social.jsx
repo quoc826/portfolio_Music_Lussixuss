@@ -8,7 +8,7 @@ function Social() {
         {
             id: 1,
             name: "Facebook",
-            url: "https://www.facebook.com/profile.php?id=61590776314266",
+            url: "https://www.facebook.com/Lussixuss/about/?id=61591585994950&sk=about#",
             color: "#1877F2",
             icon: (
                 <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

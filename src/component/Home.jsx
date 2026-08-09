@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import nightImg from "../assets/imageMusic/night.jpg";
+import nightAudio from "../assets/audio/nightAudio.mp3";
 import SEOHead from "./SEOHead";
 import { db } from "../firebase";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -13,10 +14,11 @@ const DEFAULT_SONG = {
     id: 1,
     title: "Night",
     image: nightImg,
+    audio: nightAudio,
     spotify: "https://open.spotify.com/artist/3tF1oOHGJrAnPkHSYK3J1w",
-    appleMusic: "https://music.apple.com/us/artist/lussixuss/1788668585",
-    youtubeMusic: "https://music.youtube.com/@Lussixuss",
-    soundcloud: "https://soundcloud.com/lussixuss",
+    appleMusic: "https://music.apple.com/us/album/night-single/1789118138",
+    youtubeMusic: "https://www.youtube.com/watch?v=iQ1iW-_PO8k",
+    soundcloud: "https://soundcloud.com/lussixuss/night",
 };
 
 const getCachedSong = () => {
@@ -71,12 +73,12 @@ function Home() {
                     const updatedSong = {
                         id: 1,
                         title: data.title || DEFAULT_SONG.title,
-                        image: targetImage,
-                        audio: data.audioUrl || "", // Fetch audioUrl from Firestore
-                        spotify: data.spotify || DEFAULT_SONG.spotify,
-                        appleMusic: data.appleMusic || DEFAULT_SONG.appleMusic,
-                        youtubeMusic: data.youtubeMusic || DEFAULT_SONG.youtubeMusic,
-                        soundcloud: data.soundcloud || DEFAULT_SONG.soundcloud,
+                        image: DEFAULT_SONG.image, // Ép dùng ảnh local night.jpg
+                        audio: DEFAULT_SONG.audio,
+                        spotify: DEFAULT_SONG.spotify,
+                        appleMusic: DEFAULT_SONG.appleMusic,
+                        youtubeMusic: DEFAULT_SONG.youtubeMusic,
+                        soundcloud: DEFAULT_SONG.soundcloud,
                     };
 
                     setSong(updatedSong);

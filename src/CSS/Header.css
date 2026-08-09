@@ -219,12 +219,24 @@
 /* Mobile */
 @media (max-width: 768px) {
     .header-container {
-        padding: 8px 12px;
-        gap: 8px;
+        padding: 10px 15px;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .Name {
+        position: static;
+        transform: none;
+        width: 100%;
+        text-align: center;
+        order: -1;
     }
 
     .header-container ul {
         gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .header-container a,
@@ -242,8 +254,9 @@
     }
 
     .Name h3 {
-        font-size: 16px;
+        font-size: 18px;
         letter-spacing: 2px;
+        margin-bottom: 5px;
     }
 
     .Information ul {
@@ -264,8 +277,8 @@
 /* Small mobile */
 @media (max-width: 480px) {
     .header-container {
-        padding: 6px 8px;
-        gap: 6px;
+        padding: 8px 10px;
+        gap: 8px;
     }
 
     .header-container ul {
@@ -274,7 +287,7 @@
 
     .header-container a,
     .header-container li {
-        font-size: 10px;
+        font-size: 11px;
     }
 
     .Logo ul li svg {
@@ -286,12 +299,12 @@
     }
 
     .Name h3 {
-        font-size: 12px;
+        font-size: 16px;
         letter-spacing: 1px;
     }
 
     .Information ul {
-        gap: 8px;
+        gap: 6px;
     }
 }
 

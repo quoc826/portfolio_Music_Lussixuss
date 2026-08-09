@@ -93,6 +93,7 @@ function App() {
               loop 
               muted 
               playsInline 
+              preload="auto"
               className="video-background"
             >
               <source src="/lonely-night-train-moewalls-com.mp4" type="video/mp4" />
