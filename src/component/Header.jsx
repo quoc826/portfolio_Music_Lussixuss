@@ -8,7 +8,7 @@ function Header() {
 
     return (
         <header className="header-container" role="banner">
-           
+
             <nav className="Logo" aria-label="Lussixuss social media links">
                 <ul>
                     <li>
@@ -22,7 +22,7 @@ function Header() {
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.youtube.com/@Lussixuss/videos" target="_blank" rel="noreferrer" aria-label="Lussixuss on YouTube">
+                        <a href="https://music.youtube.com/@Lussixuss" target="_blank" rel="noreferrer" aria-label="Lussixuss on YouTube">
                             <FaYoutube size={20} />
                         </a>
                     </li>
