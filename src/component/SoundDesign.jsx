@@ -20,6 +20,16 @@ function SoundDesign() {
                         <p>Remake of Genshin Impact sound design</p>
                     </div>
 
+                    {/* Saber - Explosion Sound Design */}
+                    <div className="sd-card">
+                        <video className="sd-video" controls preload="metadata">
+                            <source src="/videoSoundDesin/GAME/thiet%20ke%20lai%20vu%20no%20am%20thanh.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                        <h3>Saber - Explosion</h3>
+                        <p>Remake of Saber explosion sound design</p>
+                    </div>
+
                     {/* Wuthering Waves (WWW) */}
                     <div className="sd-card">
                         <video className="sd-video" controls preload="metadata">
