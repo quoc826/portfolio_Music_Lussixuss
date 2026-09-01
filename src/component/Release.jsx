@@ -43,28 +43,28 @@ export const DEFAULT_SONGS = [
     { id: "d2", title: "Light", image: lightImg, link: "https://social.tunecore.com/linkShare?linkid=B1eAd2h9nbgGnfNU_SauQA" },
     { id: "d3", title: "Night Light", image: nightLightImg, link: "https://social.tunecore.com/linkShare?linkid=nVykxYjeotVIwwNuGaFLmg" },
     { id: "d4", title: "Tempus", image: tempusImg, link: "https://social.tunecore.com/linkShare?linkid=aW6w-UThLqemmCcaffTThQ" },
-    { id: "d5", title: "homeNight", image: homeNightImg, link: "https://social.tunecore.com/linkShare?linkid=GE42QUWmbWZGH1ZcYLrP5Q" },
-    { id: "d6", title: "WarmWinter", image: warmWinterImg, link: "https://social.tunecore.com/linkShare?linkid=S0BhC296BC4yx7E7WAjBCA" },
-    { id: "d7", title: "wayfarer", image: wayfarerImg, link: "https://social.tunecore.com/linkShare?linkid=-V22ZzKNbLI2k8DA56f9DQ" },
-    { id: "d9", title: "NightCoffe", image: nightCoffeImg, link: "https://social.tunecore.com/linkShare?linkid=KOhU9RvrIWFYcKPLnj4qaw" },
-    { id: "d10", title: "I'msoTired", image: imsoTiredImg, link: "https://social.tunecore.com/linkShare?linkid=J5onOn4Qp1Cy19la1EU7nA" },
-    { id: "d30", title: "end", image: endImg, link: "https://social.tunecore.com/linkShare?linkid=O-puizwiPMfojKSCAxK4kg" },
-    { id: "d11", title: "SummerFlowers", image: summerFlowersImg, link: "https://social.tunecore.com/linkShare?linkid=K-GrA2FZ16AaQv34P8u-xA" },
-    { id: "d12", title: "FrierensLove", image: frierensLoveImg, link: "https://social.tunecore.com/linkShare?linkid=4gRRBPk8o5SxeYOQJT8LCQ" },
-    { id: "d13", title: "NazettoNoKibo", image: nazettoNoKiboImg, link: "https://social.tunecore.com/linkShare?linkid=jRlzp5jOU_gZITpRO_qEHw" },
+    { id: "d5", title: "Home Night", image: homeNightImg, link: "https://social.tunecore.com/linkShare?linkid=GE42QUWmbWZGH1ZcYLrP5Q" },
+    { id: "d6", title: "Warm Winter", image: warmWinterImg, link: "https://social.tunecore.com/linkShare?linkid=S0BhC296BC4yx7E7WAjBCA" },
+    { id: "d7", title: "Wayfarer", image: wayfarerImg, link: "https://social.tunecore.com/linkShare?linkid=-V22ZzKNbLI2k8DA56f9DQ" },
+    { id: "d9", title: "Night Coffee", image: nightCoffeImg, link: "https://social.tunecore.com/linkShare?linkid=KOhU9RvrIWFYcKPLnj4qaw" },
+    { id: "d10", title: "I'm so Tired", image: imsoTiredImg, link: "https://social.tunecore.com/linkShare?linkid=J5onOn4Qp1Cy19la1EU7nA" },
+    { id: "d30", title: "End", image: endImg, link: "https://social.tunecore.com/linkShare?linkid=O-puizwiPMfojKSCAxK4kg" },
+    { id: "d11", title: "Summer Flowers", image: summerFlowersImg, link: "https://social.tunecore.com/linkShare?linkid=K-GrA2FZ16AaQv34P8u-xA" },
+    { id: "d12", title: "Frieren's Love", image: frierensLoveImg, link: "https://social.tunecore.com/linkShare?linkid=4gRRBPk8o5SxeYOQJT8LCQ" },
+    { id: "d13", title: "Nazetto No Kibo", image: nazettoNoKiboImg, link: "https://social.tunecore.com/linkShare?linkid=jRlzp5jOU_gZITpRO_qEHw" },
     { id: "d15", title: "Past", image: pastImg, link: "https://social.tunecore.com/linkShare?linkid=a-t33wlJNx5S5fdpxmYHow" },
-    { id: "d16", title: "MaidCoffee", image: maidCoffeeImg, link: "https://social.tunecore.com/linkShare?linkid=fgzKIGPTyeA5-70MlVZJzg" },
+    { id: "d16", title: "Maid Coffee", image: maidCoffeeImg, link: "https://social.tunecore.com/linkShare?linkid=fgzKIGPTyeA5-70MlVZJzg" },
     { id: "d17", title: "Alone", image: aloneImg, link: "https://social.tunecore.com/linkShare?linkid=EswdeQu7Oc8_ZeLkznT6uQ" },
     { id: "d18", title: "Wind", image: windImg, link: "https://social.tunecore.com/linkShare?linkid=Z0YL-CfmKRUJ8s3D9PJsVw" },
     { id: "d19", title: "Nature", image: natureImg, link: "https://social.tunecore.com/linkShare?linkid=5B0lWq6bxzuk1mmFdBE_bQ" },
     { id: "d20", title: "Memory", image: memoryImg, link: "https://social.tunecore.com/linkShare?linkid=MX1-R5iF88FPgvAtD24gIQ" },
     { id: "d21", title: "Childhood", image: ChildhoodImg, link: "https://social.tunecore.com/linkShare?linkid=GF2gGI6MYC-nauuazZaCLg" },
-    { id: "d22", title: "TempusDream", image: tempusDreamImg, link: "https://social.tunecore.com/linkShare?linkid=uiY5SNgTE6bL8QKFqoUyIA" },
+    { id: "d22", title: "Tempus Dream", image: tempusDreamImg, link: "https://social.tunecore.com/linkShare?linkid=uiY5SNgTE6bL8QKFqoUyIA" },
     { id: "d23", title: "Journey", image: journeyImg, link: "https://social.tunecore.com/linkShare?linkid=cjgUBg-BtlCHKNLvUXMNxg" },
     { id: "d24", title: "Train", image: trainImg, link: "https://social.tunecore.com/linkShare?linkid=b9acF9KBZECJW2FRi1NZxg" },
-    { id: "d25", title: "EndlessDream", image: endlessDreamImg, link: "https://social.tunecore.com/linkShare?linkid=_VNojT7eroauUaMTJ1m_rw" },
+    { id: "d25", title: "Endless Dream", image: endlessDreamImg, link: "https://social.tunecore.com/linkShare?linkid=_VNojT7eroauUaMTJ1m_rw" },
     { id: "d26", title: "Fantasy", image: fantasyImg, link: "https://social.tunecore.com/linkShare?linkid=nCRW0TEeXp1gA-FrCM98bA" },
-    { id: "d27", title: "IJustWanttoBeAlone", image: iJustWanttoBeAloneImg, link: "https://social.tunecore.com/linkShare?linkid=GIodo7PBVsYnNtQZv5hbyQ" },
+    { id: "d27", title: "I Just Want to Be Alone", image: iJustWanttoBeAloneImg, link: "https://social.tunecore.com/linkShare?linkid=GIodo7PBVsYnNtQZv5hbyQ" },
     { id: "d28", title: "Hime", image: himeImg, link: "https://social.tunecore.com/linkShare?linkid=9kNdXkHPo753A_HvIr5igA" },
 ];
 
@@ -159,23 +159,27 @@ function Release() {
 
                 <div className="release-wrapper">
                     {songs.map((song) =>
-                        <article className="song-card" key={song.id} itemScope itemType="https://schema.org/MusicRecording" itemProp="track">
-                            <img 
-                                className="animate__animated animate__fadeInUp" 
-                                src={song.image} 
-                                alt={`${song.title} - Lofi track by Lussixuss`} 
-                                itemProp="image" 
-                                loading="lazy"
-                                decoding="async"
-                            />
-
-                            <a href={song.link} target="_blank" rel="noreferrer" className="song-overlay" itemProp="url" aria-label={`Listen to ${song.title} by Lussixuss`}>
-                                Start
-                            </a>
+                        <a href={song.link} target="_blank" rel="noreferrer" className="song-card" key={song.id} itemScope itemType="https://schema.org/MusicRecording" itemProp="track" aria-label={`Listen to ${song.title} by Lussixuss`}>
+                            <div className="song-image-wrapper">
+                                <img 
+                                    className="animate__animated animate__fadeInUp" 
+                                    src={song.image} 
+                                    alt={`${song.title} - Lofi track by Lussixuss`} 
+                                    itemProp="image" 
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                                <div className="song-overlay">Start</div>
+                            </div>
+                            <div className="song-info">
+                                <hr className="song-divider" />
+                                <span className="song-label">TRACK</span>
+                                <h3 className="song-title-text">{song.title}</h3>
+                            </div>
                             <meta itemProp="name" content={`${song.title} - Lussixuss`} />
                             <meta itemProp="byArtist" content="Lussixuss" />
                             <meta itemProp="genre" content="Lofi" />
-                        </article>
+                        </a>
                     )}
                 </div>
 
