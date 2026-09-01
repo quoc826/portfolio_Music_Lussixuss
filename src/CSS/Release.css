@@ -90,7 +90,7 @@
 }
 
 .song-overlay:hover {
-    background-color: #db6e0f;
+    background-color: #05b7f88e;
 }
 
 .song-info {
@@ -126,6 +126,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
+    letter-spacing: 2px;
 }
 
 /* 

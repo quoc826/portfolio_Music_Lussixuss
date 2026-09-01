@@ -35,9 +35,13 @@ import iJustWanttoBeAloneImg from "../assets/imageMusic/iJustWanttoBeAlone.jpg";
 import himeImg from "../assets/imageMusic/hime.jpg";
 import endImg from "../assets/imageMusic/end.jpg";
 import rentaImg from "../assets/imageMusic/renta.jpg";
+import yourVoiceImg from "../assets/imageMusic/Your voice is still here.png";
+import shelterImg from "../assets/imageMusic/Shelter.png";
 
 // Default songs (fallback when Firestore has no data)
 export const DEFAULT_SONGS = [
+    { id: "d_shelter", title: "Shelter", image: shelterImg, link: "https://social.tunecore.com/linkShare?linkid=k3H1C6M1RWM_4_-Bzfjv4g" },
+    { id: "d_your_voice", title: "Your voice is still here", image: yourVoiceImg, link: "https://social.tunecore.com/linkShare?linkid=JOO2KYqoBDpFK8CRpQU9cg" },
     { id: "d0", title: "Renta", image: rentaImg, link: "https://social.tunecore.com/linkShare?linkid=BHFTysCuEYLxQJkb60hYYA" },
     { id: "d1", title: "Night", image: nightImg, link: "https://social.tunecore.com/linkShare?linkid=GA6i9wxuXTjXwRTKxaR9_A" },
     { id: "d2", title: "Light", image: lightImg, link: "https://social.tunecore.com/linkShare?linkid=B1eAd2h9nbgGnfNU_SauQA" },
@@ -48,7 +52,7 @@ export const DEFAULT_SONGS = [
     { id: "d7", title: "Wayfarer", image: wayfarerImg, link: "https://social.tunecore.com/linkShare?linkid=-V22ZzKNbLI2k8DA56f9DQ" },
     { id: "d9", title: "Night Coffee", image: nightCoffeImg, link: "https://social.tunecore.com/linkShare?linkid=KOhU9RvrIWFYcKPLnj4qaw" },
     { id: "d10", title: "I'm so Tired", image: imsoTiredImg, link: "https://social.tunecore.com/linkShare?linkid=J5onOn4Qp1Cy19la1EU7nA" },
-    { id: "d30", title: "End", image: endImg, link: "https://social.tunecore.com/linkShare?linkid=O-puizwiPMfojKSCAxK4kg" },
+    { id: "d30", title: "If the world ends", image: endImg, link: "https://social.tunecore.com/linkShare?linkid=O-puizwiPMfojKSCAxK4kg" },
     { id: "d11", title: "Summer Flowers", image: summerFlowersImg, link: "https://social.tunecore.com/linkShare?linkid=K-GrA2FZ16AaQv34P8u-xA" },
     { id: "d12", title: "Frieren's Love", image: frierensLoveImg, link: "https://social.tunecore.com/linkShare?linkid=4gRRBPk8o5SxeYOQJT8LCQ" },
     { id: "d13", title: "Nazetto No Kibo", image: nazettoNoKiboImg, link: "https://social.tunecore.com/linkShare?linkid=jRlzp5jOU_gZITpRO_qEHw" },
@@ -97,15 +101,17 @@ function Release() {
                     setLoading(false);
                     return;
                 }
-                
+
                 const firestoreItems = [];
+                const firestoreLocalIds = new Set();
                 snapshot.forEach((doc) => {
                     const data = doc.data();
-                    
+
                     if (data.isLegacy) {
                         // Find the local song to get the correct Vite image path
                         const localSong = DEFAULT_SONGS.find(s => s.id === data.localId);
                         if (localSong) {
+                            firestoreLocalIds.add(data.localId);
                             firestoreItems.push({
                                 id: doc.id,
                                 title: data.title || localSong.title,
@@ -125,10 +131,23 @@ function Release() {
                         });
                     }
                 });
-                
-                firestoreItems.sort((a, b) => a.order - b.order);
-                setSongs(firestoreItems);
-                localStorage.setItem("cached_releases", JSON.stringify(firestoreItems));
+
+                // Append missing DEFAULT_SONGS that aren't synced to Firestore yet
+                const missingSongs = DEFAULT_SONGS.filter(s => !firestoreLocalIds.has(s.id));
+                const allItems = [
+                    ...missingSongs.map((s, i) => ({
+                        id: s.id,
+                        title: s.title,
+                        image: s.image,
+                        link: s.link,
+                        order: -999 + i // Put them at the top
+                    })),
+                    ...firestoreItems
+                ];
+
+                allItems.sort((a, b) => a.order - b.order);
+                setSongs(allItems);
+                localStorage.setItem("cached_releases", JSON.stringify(allItems));
                 setLoading(false);
             },
             (error) => {
@@ -161,11 +180,11 @@ function Release() {
                     {songs.map((song) =>
                         <a href={song.link} target="_blank" rel="noreferrer" className="song-card" key={song.id} itemScope itemType="https://schema.org/MusicRecording" itemProp="track" aria-label={`Listen to ${song.title} by Lussixuss`}>
                             <div className="song-image-wrapper">
-                                <img 
-                                    className="animate__animated animate__fadeInUp" 
-                                    src={song.image} 
-                                    alt={`${song.title} - Lofi track by Lussixuss`} 
-                                    itemProp="image" 
+                                <img
+                                    className="animate__animated animate__fadeInUp"
+                                    src={song.image}
+                                    alt={`${song.title} - Lofi track by Lussixuss`}
+                                    itemProp="image"
                                     loading="lazy"
                                     decoding="async"
                                 />
