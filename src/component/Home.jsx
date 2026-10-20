@@ -36,9 +36,7 @@ const getCachedSong = () => {
 function Home() {
     const [song, setSong] = useState(getCachedSong);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [loading, setLoading] = useState(() => {
-        return !localStorage.getItem("cached_home_song");
-    });
+    const [loading, setLoading] = useState(false);
     const audioRef = useRef(null);
 
     // Toggle Play/Pause
@@ -145,7 +143,7 @@ function Home() {
                             {/* Audio track play control */}
                             {song.audio && (
                                 <>
-                                    <audio ref={audioRef} src={song.audio} loop />
+                                    <audio ref={audioRef} src={song.audio} preload="none" loop />
                                     <button 
                                         className="play-btn animate__animated animate__zoomIn" 
                                         onClick={togglePlay}

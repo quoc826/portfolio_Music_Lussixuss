@@ -11,15 +11,32 @@ import Release from './component/Release';
 import ContactForm from './component/Infor';
 import Social from './component/Social';
 import AdminPanel from './component/AdminPanel';
-import AnimeLoader from './component/AnimeLoader';
-// import SoundDesign from './component/SoundDesign';
+import SoundDesign from './component/SoundDesign';
 import './App.css';
 import defaultBg from './assets/BgInfor.jpg';
 
 function App() {
   const [loadedBg, setLoadedBg] = useState(defaultBg);
   const [showVideoBg, setShowVideoBg] = useState(true);
+  const [loadVideoBg, setLoadVideoBg] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const videoRef = useRef(null);
+
+  // Let the page and critical images finish before downloading the background movie.
+  useEffect(() => {
+    let timer;
+    const start = () => {
+      timer = window.setTimeout(() => {
+        if (!navigator.connection?.saveData) setLoadVideoBg(true);
+      }, 1200);
+    };
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
+    return () => {
+      window.removeEventListener('load', start);
+      window.clearTimeout(timer);
+    };
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -43,7 +60,6 @@ function App() {
 
         // Pre-load the custom background image
         const img = new Image();
-        img.src = targetUrl;
         img.onload = () => {
           setLoadedBg(targetUrl);
           setShowVideoBg(false);
@@ -52,6 +68,7 @@ function App() {
           setLoadedBg(defaultBg);
           setShowVideoBg(true);
         };
+        img.src = targetUrl;
       },
       (error) => {
         console.error("Firestore background listener error:", error.message);
@@ -65,9 +82,7 @@ function App() {
   useEffect(() => {
     const root = document.getElementById("root");
     if (root) {
-      if (showVideoBg) {
-        root.style.backgroundImage = "none";
-      } else if (loadedBg) {
+      if (loadedBg) {
         root.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${loadedBg})`;
       }
     }
@@ -80,26 +95,35 @@ function App() {
         console.log("Autoplay check:", err.message);
       });
     }
-  }, [showVideoBg]);
+  }, [showVideoBg, loadVideoBg]);
 
   return (
     <AuthProvider>
       <div className="app-container">
-        {showVideoBg && (
-          <>
+        {loadVideoBg && (
+          <div
+            className={`background-video-layer${showVideoBg && videoReady ? ' is-visible' : ''}`}
+            aria-hidden="true"
+            onTransitionEnd={(event) => {
+              if (event.target === event.currentTarget && !showVideoBg) {
+                videoRef.current?.pause();
+              }
+            }}
+          >
             <video 
               ref={videoRef}
-              autoPlay 
               loop 
               muted 
               playsInline 
-              preload="auto"
+              preload="none"
+              poster={defaultBg}
+              onPlaying={() => setVideoReady(true)}
               className="video-background"
             >
               <source src="/lonely-night-train-moewalls-com.mp4" type="video/mp4" />
             </video>
             <div className="video-overlay" />
-          </>
+          </div>
         )}
         <Header />
         
@@ -107,7 +131,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home/>} />
             <Route path='/release' element={<Release/>} />
-            {/* <Route path='/sound-design' element={<SoundDesign />} /> */}
+            <Route path='/sound-design' element={<SoundDesign />} />
             <Route path='/contact' element={<ContactForm />} />
             <Route path='/social' element={<Social />} />
             <Route path='/admin' element={<AdminPanel />} />
